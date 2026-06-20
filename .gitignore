@@ -6,5 +6,6 @@ dist/
 wheels/
 *.egg-info
 game_state.jsonl
+game_events.jtsonl
 # Virtual environments
 .venv
