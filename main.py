@@ -55,7 +55,7 @@ def main():
             sprite.update(dt)
         
         for asteroid in asteroids:
-            if asteroid.collides_with(player):
+            if asteroid.collides_with_player(player):
                 log_event("player_hit")
                 health -= 1
                 asteroid.kill()
