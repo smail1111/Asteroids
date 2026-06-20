@@ -98,7 +98,7 @@ def main():
         screen.blit(health_text, textRect)
         screen.blit(score_text, textRect2)
     
-        dt = clock.tick(30) / 100
+        dt = clock.tick(60) / 100
         
         pygame.display.flip()
 

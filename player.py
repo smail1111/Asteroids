@@ -51,6 +51,15 @@ class Player(CircleShape):
                     self.timer = PLAYER_SHOOT_COOLDOWN_SECONDS
         self.timer -= dt
     
+        if self.position[0] < 0:
+            self.position[0] = 1280
+        if self.position[0] > 1280:
+            self.position[0] = 0
+        if self.position[1] < 0:
+            self.position[1] = 720
+        if self.position[1] > 720:
+            self.position[1] = 0
+        
         if self.triple_shot_duration < 0:
             self.have_triple_shot = False
         else:
