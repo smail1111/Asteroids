@@ -60,7 +60,10 @@ def main():
         for asteroid in asteroids:
             if asteroid.collides_with_player(player):
                 log_event("player_hit")
-                health -= 1
+                if player.have_shield:
+                    player.have_shield = False
+                else:
+                    health -= 1
                 asteroid.kill()
                 if health < 1:
                     print("Game Over!")
@@ -77,9 +80,7 @@ def main():
 
         for power in powers:
             if power.collides_with_player(player):
-                player.have_triple_shot = True
-                power.kill()
-                player.power_duration = POWER_DURATION
+                power.collect_power(player)
 
         for sprite in drawable:
             sprite.draw(screen)

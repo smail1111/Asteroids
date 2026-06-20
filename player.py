@@ -11,7 +11,8 @@ class Player(CircleShape):
         self.timer = 0.0
     
         self.have_triple_shot = False
-        self.power_duration = 0
+        self.have_shield = False
+        self.triple_shot_duration = 0
         
     
     def triangle(self) -> list[pygame.Vector2]:
@@ -24,6 +25,8 @@ class Player(CircleShape):
     
     def draw(self, screen: pygame.Surface):
         pygame.draw.polygon(screen, "yellow", self.triangle(), LINE_WIDTH)
+        if self.have_shield:
+            pygame.draw.circle(screen, "lightblue", self.position, self.radius*1.5,2)
 
     def rotate(self, dt: float):
         self.rotation += PLAYER_TURN_SPEED * dt
@@ -48,10 +51,10 @@ class Player(CircleShape):
                     self.timer = PLAYER_SHOOT_COOLDOWN_SECONDS
         self.timer -= dt
     
-        if self.power_duration < 0:
+        if self.triple_shot_duration < 0:
             self.have_triple_shot = False
         else:
-            self.power_duration -= dt
+            self.triple_shot_duration -= dt
     
     def move(self, dt):
         unit_vector = pygame.Vector2(0, 1)

@@ -35,4 +35,6 @@ class Asteroid(CircleShape):
 
         ran = random.randint(1,POWER_DROP_CHANCE)
         if ran == POWER_DROP_CHANCE:
-            power = Power(self.position[0],self.position[1])
+            power = TripleShot(self.position[0],self.position[1])
+        elif ran == 1:
+            power = Shield(self.position[0],self.position[1])
