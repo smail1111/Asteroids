@@ -9,6 +9,11 @@ class Player(CircleShape):
         
         self.rotation = 0
         self.timer = 0.0
+    
+        self.have_triple_shot = False
+        self.power_duration = 0
+        
+    
     def triangle(self) -> list[pygame.Vector2]:
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
         right = pygame.Vector2(0, 1).rotate(self.rotation + 90) * self.radius / 1.5
@@ -35,9 +40,18 @@ class Player(CircleShape):
             self.move(dt)
         if keys[pygame.K_SPACE]:
             if self.timer < 0:
-                self.shoot()
-                self.timer = PLAYER_SHOOT_COOLDOWN_SECONDS
+                if self.have_triple_shot:
+                    self.triple_shot()
+                    self.timer = PLAYER_SHOOT_COOLDOWN_SECONDS
+                else:
+                    self.shoot()
+                    self.timer = PLAYER_SHOOT_COOLDOWN_SECONDS
         self.timer -= dt
+    
+        if self.power_duration < 0:
+            self.have_triple_shot = False
+        else:
+            self.power_duration -= dt
     
     def move(self, dt):
         unit_vector = pygame.Vector2(0, 1)
@@ -50,3 +64,18 @@ class Player(CircleShape):
         shot = Shot(self.position[0], self.position[1])
         shot.velocity = pygame.Vector2(0, 1).rotate(self.rotation)
         shot.velocity *= PLAYER_SHOT_SPEED
+
+    def triple_shot(self):
+        shot0 = Shot(self.position[0], self.position[1])
+        shot0.velocity = pygame.Vector2(0, 1).rotate(self.rotation)
+        shot0.velocity *= PLAYER_SHOT_SPEED
+
+        range = 20
+    
+        shot1 = Shot(self.position[0], self.position[1])
+        shot1.velocity = pygame.Vector2(0, 1).rotate(self.rotation).rotate(range)
+        shot1.velocity *= PLAYER_SHOT_SPEED
+
+        shot2 = Shot(self.position[0], self.position[1])
+        shot2.velocity = pygame.Vector2(0, 1).rotate(self.rotation).rotate(-range)
+        shot2.velocity *= PLAYER_SHOT_SPEED

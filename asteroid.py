@@ -1,3 +1,4 @@
+from power import *
 from logger import *
 from constants import *
 from circleshape import *
@@ -15,14 +16,23 @@ class Asteroid(CircleShape):
     
     def split(self):
         self.kill()
+        
         if self.radius <= ASTEROID_MIN_RADIUS:
             return
+        
         log_event("asteroid_split")
         ran = random.uniform(30,50)
+        
         vector1= self.velocity.rotate(ran)
         vector2 = self.velocity.rotate(-ran)
         new_radius = self.radius - ASTEROID_MIN_RADIUS
+        
         new_asteroid1 = Asteroid(self.position[0], self.position[1],new_radius)
         new_asteroid1.velocity = vector1 * 1.2
+        
         new_asteroid2 = Asteroid(self.position[0], self.position[1],new_radius)
         new_asteroid2.velocity = vector2 * 1.2
+
+        ran = random.randint(1,POWER_DROP_CHANCE)
+        if ran == POWER_DROP_CHANCE:
+            power = Power(self.position[0],self.position[1])
