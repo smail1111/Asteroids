@@ -34,3 +34,12 @@ class Shield(Power):
     def collect_power(self, player):
         self.kill()
         player.have_shield = True
+
+class Speed_Boost(Power):
+    def __init__(self,x,y):
+        super().__init__(x,y,"red")
+
+    def collect_power(self, player):
+        self.kill()
+        player.have_speed_boost = True
+        player.speed_boost_duration = SPEED_BOOST_DURATION

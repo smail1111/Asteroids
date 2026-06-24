@@ -9,11 +9,14 @@ class Player(CircleShape):
         
         self.rotation = 0
         self.timer = 0.0
-    
+        
+        self.have_speed_boost = False
+        self.speed_boost_duration = 0
+        
         self.have_triple_shot = False
-        self.have_shield = False
         self.triple_shot_duration = 0
         
+        self.have_shield = False
     
     def triangle(self) -> list[pygame.Vector2]:
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
@@ -65,11 +68,17 @@ class Player(CircleShape):
         else:
             self.triple_shot_duration -= dt
     
+        if self.speed_boost_duration < 0:
+            self.have_speed_boost = False
+        else:
+            self.speed_boost_duration -= dt
+    
     def move(self, dt):
         unit_vector = pygame.Vector2(0, 1)
         rotated_vector = unit_vector.rotate(self.rotation)
         rotated_with_speed_vector = rotated_vector * PLAYER_SPEED * dt
-        self.position += rotated_with_speed_vector
+        
+        self.position += rotated_with_speed_vector * 2 if self.have_speed_boost else rotated_with_speed_vector
 
     def shoot(self):
         

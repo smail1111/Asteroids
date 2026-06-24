@@ -33,8 +33,11 @@ class Asteroid(CircleShape):
         new_asteroid2 = Asteroid(self.position[0], self.position[1],new_radius)
         new_asteroid2.velocity = vector2 * 1.2
 
-        ran = random.randint(1,POWER_DROP_CHANCE)
+        ran = random.randint(1, POWER_DROP_CHANCE + 2)
+        
         if ran == POWER_DROP_CHANCE:
-            power = TripleShot(self.position[0],self.position[1])
-        elif ran == 1:
-            power = Shield(self.position[0],self.position[1])
+            power = TripleShot(self.position[0], self.position[1])
+        elif ran == POWER_DROP_CHANCE + 1:
+            power = Shield(self.position[0], self.position[1]) 
+        elif ran == POWER_DROP_CHANCE + 2:
+            power = Speed_Boost(self.position[0], self.position[1])
