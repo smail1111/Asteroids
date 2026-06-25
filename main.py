@@ -66,6 +66,7 @@ def main():
                 else:
                     health -= 1
                 asteroid.kill()
+                Explosion(asteroid.position[0], asteroid.position[1], asteroid.radius)
                 if health < 1:
                     print("Game Over!")
                     print(f"Score: {score:.0f}")

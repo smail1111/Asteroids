@@ -17,7 +17,7 @@ class Asteroid(CircleShape):
 
     def split(self):
         self.kill()
-        exposion = Explosion(self.position[0], self.position[1],self.radius)
+        Explosion(self.position[0], self.position[1],self.radius)
         if self.radius <= ASTEROID_MIN_RADIUS:
             return
         
@@ -37,8 +37,8 @@ class Asteroid(CircleShape):
         ran = random.randint(1, POWER_DROP_CHANCE + 2)
         
         if ran == POWER_DROP_CHANCE:
-            power = TripleShot(self.position[0], self.position[1])
+            TripleShot(self.position[0], self.position[1])
         elif ran == POWER_DROP_CHANCE + 1:
-            power = Shield(self.position[0], self.position[1]) 
+            Shield(self.position[0], self.position[1]) 
         elif ran == POWER_DROP_CHANCE + 2:
-            power = Speed_Boost(self.position[0], self.position[1])
+            Speed_Boost(self.position[0], self.position[1])
