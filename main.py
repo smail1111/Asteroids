@@ -6,7 +6,7 @@ from asteroid import *
 from player import *
 from logger import *
 from constants import *
-
+from explosion import *
 import pygame
 
 def main():
@@ -31,8 +31,9 @@ def main():
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = (updatable)
     Shot.containers = (shots, updatable, drawable)
-    Power.containers = (powers, drawable, updatable)
-    
+    Power.containers = (powers, updatable, drawable)
+    Explosion.containers = (updatable, drawable)
+
     x = SCREEN_WIDTH / 2
     y = SCREEN_HEIGHT / 2
 
