@@ -55,12 +55,12 @@ class Player(CircleShape):
         self.timer -= dt
     
         if self.position[0] < 0:
-            self.position[0] = 1280
-        if self.position[0] > 1280:
+            self.position[0] = SCREEN_WIDTH
+        elif self.position[0] > SCREEN_WIDTH:
             self.position[0] = 0
         if self.position[1] < 0:
-            self.position[1] = 720
-        if self.position[1] > 720:
+            self.position[1] = SCREEN_HEIGHT
+        elif self.position[1] > SCREEN_HEIGHT:
             self.position[1] = 0
         
         if self.triple_shot_duration < 0:

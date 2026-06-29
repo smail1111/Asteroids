@@ -8,7 +8,7 @@ class Power(CircleShape):
         self.color = color
     
     def draw(self, screen):
-        pygame.draw.circle(screen,self.color,self.position,self.radius)
+        pygame.draw.circle(screen,self.color,self.position,self.radius, 3)
 
     def update(self, dt):
         if self.lifespan < 0:

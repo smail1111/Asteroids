@@ -14,6 +14,8 @@ pygame.init()
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
+pygame.display.set_caption("Asteroids")
+
 title_font = pygame.font.Font('freesansbold.ttf', 150)
 
 font = pygame.font.Font('freesansbold.ttf', 50)
@@ -124,7 +126,7 @@ def run_asteroids():
                 Explosion(asteroid.position[0], asteroid.position[1], asteroid.radius)
 
                 if health < 1:
-                    print("Game Over!")
+                    print("You Died!")
                     print(f"Score: {score:.0f}")
                     running = False
 
